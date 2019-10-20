@@ -16,7 +16,7 @@ class TimeEntry
     /**
      * @var int
      */
-    private $toggl_pid;
+    private $togglPid;
 
     /**
      * @var DateTimeImmutable
@@ -38,7 +38,7 @@ class TimeEntry
     /**
      * @var string[]
      */
-    private $toggl_tags;
+    private $togglTags;
 
     public function __construct(string $start, string $stop)
     {
@@ -57,8 +57,8 @@ class TimeEntry
     public function asArray() : array
     {
         return [
-            'pid' => $this->toggl_pid,
-            'tags' => $this->toggl_tags,
+            'pid' => $this->togglPid,
+            'tags' => $this->togglTags,
             'description' => $this->description,
             'start' => $this->start->format('c'),
             'stop' => $this->stop->format('c'),
@@ -68,11 +68,11 @@ class TimeEntry
 
     public function addTag(string $tag) : void
     {
-        $this->toggl_tags[] = $tag;
+        $this->togglTags[] = $tag;
     }
 
     public function setTogglPid(int $pid) : void
     {
-        $this->toggl_pid = $pid;
+        $this->togglPid = $pid;
     }
 }

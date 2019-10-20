@@ -18,12 +18,12 @@ class TimeEntryPusher
     /**
      * @var string
      */
-    private $api_token;
+    private $apiToken;
 
-    public function __construct(Client $client, string $api_token)
+    public function __construct(Client $client, string $apiToken)
     {
         $this->client = $client;
-        $this->api_token = $api_token;
+        $this->apiToken = $apiToken;
     }
 
     public function push(TimeEntry $entry) : void
@@ -31,7 +31,7 @@ class TimeEntryPusher
         // https://github.com/toggl/toggl_api_docs/blob/master/chapters/time_entries.md
         $uri = 'time_entries';
         $options = [
-            'auth' => [$this->api_token, 'api_token'],
+            'auth' => [$this->apiToken, 'api_token'],
             'json' => $entry->asArray(),
         ];
 

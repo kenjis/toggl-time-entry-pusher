@@ -24,13 +24,13 @@ class ProjectFetcher
     /**
      * @var string
      */
-    private $api_token;
+    private $apiToken;
 
-    public function __construct(Client $client, int $wid, string $api_token)
+    public function __construct(Client $client, int $wid, string $apiToken)
     {
         $this->client = $client;
         $this->wid = $wid;
-        $this->api_token = $api_token;
+        $this->apiToken = $apiToken;
     }
 
     public function fetch() : ResponseInterface
@@ -38,7 +38,7 @@ class ProjectFetcher
         // https://github.com/toggl/toggl_api_docs/blob/master/chapters/workspaces.md#get-workspace-projects
         $uri = 'workspaces/' . $this->wid . '/projects';
         $options = [
-            'auth' => [$this->api_token, 'api_token'],
+            'auth' => [$this->apiToken, 'api_token'],
         ];
 
         return $this->client->request('GET', $uri, $options);
