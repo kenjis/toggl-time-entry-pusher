@@ -4,80 +4,34 @@ declare(strict_types=1);
 
 namespace Kenjis\ToggleTimeEntryPusher\Parser;
 
+use Kenjis\ToggleTimeEntryPusher\Line\DateLine;
+use Kenjis\ToggleTimeEntryPusher\Line\OtherLine;
+use Kenjis\ToggleTimeEntryPusher\Line\TimeEntryLine;
 use PHPUnit\Framework\TestCase;
 
 class TestParserJaTest extends TestCase
 {
-    public function testCanParseAnEntry() : void
+    public function testCanParseDate() : void
     {
-        $pidMap = [
-            'FOO' => 11111,
-        ];
-        $parser = new TextParserJa($pidMap);
+        $parser = new TextParserJa();
 
-        $text = '2019/10/18（金）
-■本日の報告
-09:30-10:00[30] FOO #1110 クラス設計
-';
-        $array = [];
-        foreach ($parser->parse($text) as $entry) {
-            $array[] = $entry;
-        }
+        $text = '2019/10/18（金）';
+        $line = $parser->parse($text);
 
-        $this->assertCount(1, $array);
-
-        $expected = [
-            'pid' => 11111,
-            'tags' => null,
-            'description' => '#1110 クラス設計',
-            'start' => '2019-10-18T09:30:00+09:00',
-            'stop' => '2019-10-18T10:00:00+09:00',
-            'duration' => 1800,
-        ];
-        $this->assertSame($expected, $array[0]->asArray());
+        $this->assertInstanceOf(DateLine::class, $line);
     }
 
-    public function testCanParseTwoEntries() : void
+    public function testCanParseTimeEntry() : void
     {
-        $pidMap = [
-            'FOO' => 11111,
-            'BAR' => 22222,
-        ];
-        $parser = new TextParserJa($pidMap);
+        $parser = new TextParserJa();
 
-        $text = '2019/10/18（金）
-■本日の報告
-09:30-10:00[30] FOO #1110 クラス設計
-10:00-10:30[30] BAR #1111 レビュー
-';
-        $array = $parser->parse($text);
-        $test = [];
-        foreach ($array as $entry) {
-            $test[] = $entry->asArray();
-        }
+        $text = '09:30-10:00[30] FOO #1110 クラス設計';
+        $line = $parser->parse($text);
 
-        $expected = [
-            [
-                'pid' => 11111,
-                'tags' => null,
-                'description' => '#1110 クラス設計',
-                'start' => '2019-10-18T09:30:00+09:00',
-                'stop' => '2019-10-18T10:00:00+09:00',
-                'duration' => 1800,
-            ],
-            [
-                'pid' => 22222,
-                'tags' => null,
-                'description' => '#1111 レビュー',
-                'start' => '2019-10-18T10:00:00+09:00',
-                'stop' => '2019-10-18T10:30:00+09:00',
-                'duration' => 1800,
-            ],
-        ];
-        $this->assertSame($expected, $test);
+        $this->assertInstanceOf(TimeEntryLine::class, $line);
     }
 
-    public function testCanParseAnEntryOfOperation() : void
+    public function testCanParseOtherLine() : void
     {
         $pidMap = [
             'FOO' => 11111,
@@ -88,35 +42,9 @@ class TestParserJaTest extends TestCase
         ];
         $parser = new TextParserJa($pidMap, $tagMap);
 
-        $text = '2019/10/18（金）
-■本日の報告
-09:00-09:30[30] FOO #1111 クラス設計
-09:30-10:00[30] FOOOPS ログ確認
-';
-        $array = $parser->parse($text);
-        $test = [];
-        foreach ($array as $entry) {
-            $test[] = $entry->asArray();
-        }
+        $text = '■本日の報告';
+        $line = $parser->parse($text);
 
-        $expected = [
-            [
-                'pid' => 11111,
-                'tags' => null,
-                'description' => '#1111 クラス設計',
-                'start' => '2019-10-18T09:00:00+09:00',
-                'stop' => '2019-10-18T09:30:00+09:00',
-                'duration' => 1800,
-            ],
-            [
-                'pid' => 11111,
-                'tags' => ['保守'],
-                'description' => 'ログ確認',
-                'start' => '2019-10-18T09:30:00+09:00',
-                'stop' => '2019-10-18T10:00:00+09:00',
-                'duration' => 1800,
-            ],
-        ];
-        $this->assertSame($expected, $test);
+        $this->assertInstanceOf(OtherLine::class, $line);
     }
 }
