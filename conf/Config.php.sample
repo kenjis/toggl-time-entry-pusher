@@ -15,4 +15,21 @@ class Config
      * @var int
      */
     public const WID = <Workspace ID>;
+
+    /**
+     * @var array
+     */
+    public const PID_MAP = [
+        // Project Code => Toggl PID
+        'FOO' => 555555555,
+        'BAR' => 666666666,
+    ];
+
+    /**
+     * @var array
+     */
+    public const TAG_MAP = [
+        // Project Code Suffix => Tag Name
+        'OPS' => 'operation',
+    ];
 }
