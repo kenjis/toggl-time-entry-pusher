@@ -70,7 +70,7 @@ class TimeEntryTest extends TestCase
         $pid = 12345;
         $actual->setTogglPid($pid);
 
-        $this->assertEquals(
+        $this->assertSame(
             [
                 'pid' => $pid,
                 'tags' => [$tag],
