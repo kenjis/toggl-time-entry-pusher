@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 
 class TimeEntryFactoryTest extends TestCase
 {
-    public function testCanCreateInstance()
+    public function testCanCreateInstance() : void
     {
         $pidMap = [
             'FOO' => 11111,
