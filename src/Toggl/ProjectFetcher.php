@@ -43,4 +43,12 @@ class ProjectFetcher
 
         return $this->client->request('GET', $uri, $options);
     }
+
+    public function fetchAsArray() : array
+    {
+        $response = $this->fetch();
+        $jsonString = $response->getBody()->getContents();
+
+        return json_decode($jsonString, true);
+    }
 }

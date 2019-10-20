@@ -20,9 +20,7 @@ class GetProjectList
 
     public function run()
     {
-        $response = $this->fetcher->fetch();
-        $jsonString = $response->getBody()->getContents();
-        $list = json_decode($jsonString, true);
+        $list = $this->fetcher->fetchAsArray();
 
         foreach ($list as $project) {
             foreach ($project as $key => $val) {
