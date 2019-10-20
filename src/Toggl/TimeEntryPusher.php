@@ -30,9 +30,11 @@ class TimeEntryPusher
     {
         // https://github.com/toggl/toggl_api_docs/blob/master/chapters/time_entries.md
         $uri = 'time_entries';
+        $entryArray = $entry->asArray();
+        $entryArray['created_with'] = 'toggl-time-entry-pusher';
         $options = [
             'auth' => [$this->apiToken, 'api_token'],
-            'json' => $entry->asArray(),
+            'json' => ['time_entry' => $entryArray],
         ];
 
         $response = $this->client->request('POST', $uri, $options);
