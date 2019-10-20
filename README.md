@@ -20,6 +20,10 @@
 ### How to Run
 
 ```
+$ php get-project-list.php
+```
+
+```
 $ time php push-time-entries.php time-record.txt
 ```
 
