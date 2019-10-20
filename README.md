@@ -17,7 +17,7 @@
 10:00-10:25[25] BAROPS ログ確認
 ```
 
-### How to Run
+## How to Run
 
 ```
 $ php get-project-list.php
@@ -27,7 +27,7 @@ $ php get-project-list.php
 $ time php push-time-entries.php time-record.txt
 ```
 
-### How to Debug
+## How to Debug
 
 ```
 $ curl -v -u <API token>:api_token -X GET https://www.toggl.com/api/v8/workspaces
