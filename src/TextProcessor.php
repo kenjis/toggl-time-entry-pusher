@@ -91,6 +91,12 @@ class TextProcessor
 
                 if ($this->mode === 'push' && $entry !== null) {
                     // push to Toggl
+
+                    // > Limits will and can change during time,
+                    // > but a safe window will be 1 request per second.
+                    // https://github.com/toggl/toggl_api_docs#the-api-format
+                    sleep(1);
+
                     // @TODO catch exceptions
                     $this->pusher->push($entry);
                     $this->updatedText .= '✔ ︎' . $lineString . "\n";
