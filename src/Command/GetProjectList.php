@@ -18,7 +18,7 @@ class GetProjectList
         $this->fetcher = $fetcher;
     }
 
-    public function run()
+    public function run() : void
     {
         $list = $this->fetcher->fetchAsArray();
 
