@@ -32,6 +32,11 @@ class TextProcessor
      */
     private $updatedText;
 
+    /**
+     * @var string
+     */
+    private $mode;
+
     public function __construct(
         ParserInterface $parser,
         TimeEntryFactory $factory,
@@ -47,15 +52,17 @@ class TextProcessor
         $lines = explode("\n", $text);
 
         // check input text
+        $this->mode = 'check';
         $this->processLines($lines);
 
         // push to Toggl
-        $this->processLines($lines, true);
+        $this->mode = 'push';
+        $this->processLines($lines);
 
         return $this->updatedText;
     }
 
-    private function processLines(array $lines, bool $push = false) : void
+    private function processLines(array $lines) : void
     {
         $this->updatedText = '';
         $date = null;
@@ -82,7 +89,7 @@ class TextProcessor
                     $line->getDesc()
                 );
 
-                if ($push && $entry !== null) {
+                if ($this->mode === 'push' && $entry !== null) {
                     // push to Toggl
                     // @TODO catch exceptions
                     $this->pusher->push($entry);
