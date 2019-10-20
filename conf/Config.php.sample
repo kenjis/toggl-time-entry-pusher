@@ -3,6 +3,11 @@
 class Config
 {
     /**
+     * @var string
+     */
+    public const TOGGL_BASE_URL = 'https://www.toggl.com/api/v8/';
+
+    /**
      * Toggl API Key
      *
      * @var string

@@ -11,7 +11,7 @@ use Kenjis\ToggleTimeEntryPusher\Toggl\ProjectFetcher;
 
 $client = new Client([
     // Base URI is used with relative requests
-    'base_uri' => 'https://www.toggl.com/api/v8/',
+    'base_uri' => Config::TOGGL_BASE_URL,
 ]);
 $fetcher = new ProjectFetcher(
     $client,

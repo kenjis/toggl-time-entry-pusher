@@ -23,7 +23,7 @@ class PushTimeEntries
         $parser = new TextParserJa();
         $client = new Client([
             // Base URI is used with relative requests
-            'base_uri' => 'https://www.toggl.com/api/v8/',
+            'base_uri' => Config::TOGGL_BASE_URL,
         ]);
         $pusher = new TimeEntryPusher(
             $client,
