@@ -19,7 +19,10 @@ class TestParserJaTest extends TestCase
 ■本日の報告
 09:30-10:00[30] FOO #1110 クラス設計
 ';
-        $array = $parser->parse($text);
+        $array = [];
+        foreach ($parser->parse($text) as $entry) {
+            $array[] = $entry;
+        }
 
         $this->assertCount(1, $array);
 

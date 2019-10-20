@@ -6,6 +6,7 @@ namespace Kenjis\ToggleTimeEntryPusher\Parser;
 
 use Kenjis\ToggleTimeEntryPusher\Exception\RuntimeException;
 use Kenjis\ToggleTimeEntryPusher\TimeEntry;
+use Generator;
 
 class TextParserJa
 {
@@ -25,15 +26,11 @@ class TextParserJa
         $this->tagMap = $tagMap;
     }
 
-    /**
-     * @return TimeEntry[]
-     */
-    public function parse(string $text) : array
+    public function parse(string $text) : Generator
     {
         $lines = explode("\n", $text);
 
         $date = null;
-        $array = [];
 
         foreach ($lines as $line) {
             // Get date
@@ -65,14 +62,13 @@ class TextParserJa
                 );
 
                 if ($entry !== null) {
-                    $array[] = $entry;
+                    yield $entry;
                 }
 
                 continue;
             }
         }
 
-        return $array;
     }
 
     private function createTimeEntry(
