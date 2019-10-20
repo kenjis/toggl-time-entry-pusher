@@ -1,0 +1,18 @@
+<?php
+
+class Config
+{
+    /**
+     * Toggl API Key
+     *
+     * @var string
+     */
+    public const API_KEY = '<Your API Key>';
+
+    /**
+     * Toggl Workspace ID
+     *
+     * @var int
+     */
+    public const WID = <Workspace ID>;
+}
