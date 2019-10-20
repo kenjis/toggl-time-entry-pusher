@@ -53,6 +53,10 @@
         "cs-fix": [
             "vendor/bin/php-cs-fixer fix -v",
             "vendor/bin/phpcbf src tests"
+        ],
+        "loc": [
+            "vendor/bin/phploc src",
+            "vendor/bin/phploc --count-tests tests"
         ]
     }
 }
