@@ -11,6 +11,11 @@ class DateLine extends AbstractLine
      */
     private $date;
 
+    public function getDate() : string
+    {
+        return $this->date;
+    }
+
     public function setDate(string $date) : void
     {
         $this->date = $date;
