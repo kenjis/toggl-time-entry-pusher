@@ -46,7 +46,7 @@ class TimeEntry
         $this->stop = new DateTimeImmutable($stop);
 
         $this->duration =
-            (int) $this->stop->format('U') - $this->start->format('U');
+            (int) $this->stop->format('U') - (int) $this->start->format('U');
     }
 
     public function setDescription(string $desc) : void
