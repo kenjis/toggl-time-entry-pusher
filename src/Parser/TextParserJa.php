@@ -64,7 +64,9 @@ class TextParserJa
                     $desc
                 );
 
-                $array[] = $entry;
+                if ($entry !== null) {
+                    $array[] = $entry;
+                }
 
                 continue;
             }
@@ -79,9 +81,10 @@ class TextParserJa
         string $start,
         string $stop,
         string $desc
-    ) : TimeEntry {
+    ) : ?TimeEntry {
         if (! isset($this->pidMap[$code])) {
-            throw new RuntimeException('Cannot get pid: ' . $code);
+            return null;
+//            throw new RuntimeException('Cannot get pid: ' . $code);
         }
         $pid = $this->pidMap[$code];
 
