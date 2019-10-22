@@ -70,7 +70,7 @@ class TextProcessor
         $this->mode = 'push';
         $this->processLines($lines);
 
-        return $this->updatedText;
+        return trim($this->updatedText);
     }
 
     private function processLines(array $lines) : void
