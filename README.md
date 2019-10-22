@@ -19,8 +19,8 @@ and pushes the time entries to Toggl API.
 |`<Date>`        |YYYY/MM/DD|
 |`<Start>`       |HH:MM     |
 |`<Stop>`        |HH:MM     |
-|`<Minutes>`     | `[0-9]`  |
-|`<Project Code>`| `[A-Z]`  |
+|`<Minutes>`     | `[0-9]+`  |
+|`<Project Code>`| `[A-Z]+`  |
 
 #### Project Code
 
