@@ -103,6 +103,7 @@ class TextProcessor
                         $message = 'Skip: ' . $entry->asString();
                         $this->outputter->output($message);
 
+                        $this->updatedText .= $lineString . "︎\n";
                         continue;
                     }
 
