@@ -7,6 +7,7 @@ require __DIR__ . '/conf/Config.php';
 
 use GuzzleHttp\Client;
 use Kenjis\ToggleTimeEntryPusher\Command\GetProjectList;
+use Kenjis\ToggleTimeEntryPusher\LineOutputter;
 use Kenjis\ToggleTimeEntryPusher\Toggl\ProjectFetcher;
 
 $client = new Client([
@@ -18,6 +19,7 @@ $fetcher = new ProjectFetcher(
     Config::WID,
     Config::API_KEY
 );
+$outputter = new LineOutputter();
 
-$command = new GetProjectList($fetcher);
+$command = new GetProjectList($fetcher, $outputter);
 $command->run();

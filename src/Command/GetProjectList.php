@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Kenjis\ToggleTimeEntryPusher\Command;
 
+use Kenjis\ToggleTimeEntryPusher\LineOutputter;
 use Kenjis\ToggleTimeEntryPusher\Toggl\ProjectFetcher;
 
 class GetProjectList
@@ -13,9 +14,15 @@ class GetProjectList
      */
     private $fetcher;
 
-    public function __construct(ProjectFetcher $fetcher)
+    /**
+     * @var LineOutputter
+     */
+    private $outputter;
+
+    public function __construct(ProjectFetcher $fetcher, LineOutputter $outputter)
     {
         $this->fetcher = $fetcher;
+        $this->outputter = $outputter;
     }
 
     public function run() : void
@@ -24,9 +31,11 @@ class GetProjectList
 
         foreach ($list as $project) {
             foreach ($project as $key => $val) {
-                printf('%14s: %s' . PHP_EOL, $key, $val);
+                $this->outputter->output(
+                    sprintf('%14s: %s', $key, $val)
+                );
             }
-            echo PHP_EOL;
+            $this->outputter->output('');
         }
     }
 }

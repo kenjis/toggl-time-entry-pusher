@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Kenjis\ToggleTimeEntryPusher\Command;
 
+use Kenjis\ToggleTimeEntryPusher\LineOutputter;
 use Kenjis\ToggleTimeEntryPusher\Toggl\ProjectFetcher;
 use PHPUnit\Framework\TestCase;
 
@@ -84,8 +85,9 @@ auto_estimates:
 
 EOL;
         $this->expectOutputString($expected);
+        $outputter = new LineOutputter();
+        $command = new GetProjectList($fetcher, $outputter);
 
-        $command = new GetProjectList($fetcher);
         $command->run();
     }
 }
