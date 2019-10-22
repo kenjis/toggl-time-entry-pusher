@@ -91,7 +91,12 @@ class TextProcessor
                     $line->getDesc()
                 );
 
-                if ($this->mode === 'push' && $entry !== null) {
+                if ($entry instanceof NoPidTimeEntry) {
+                    // @TODO output skipping entry
+                    return;
+                }
+
+                if ($this->mode === 'push') {
                     // push to Toggl
 
                     // > Limits will and can change during time,

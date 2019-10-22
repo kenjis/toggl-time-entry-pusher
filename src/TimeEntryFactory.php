@@ -30,20 +30,25 @@ class TimeEntryFactory
         string $start,
         string $stop,
         string $desc
-    ) : ?TimeEntry {
-        if (! isset($this->pidMap[$code])) {
-            return null;
-//            throw new RuntimeException('Cannot get pid: ' . $code);
+    ) : TimeEntry {
+        $pid = null;
+        if (isset($this->pidMap[$code])) {
+            $pid = $this->pidMap[$code];
+
+            $entry = new TimeEntry(
+                $code,
+                $date . ' ' . $start,
+                $date . ' ' . $stop
+            );
+            $entry->setTogglPid($pid);
+        } else {
+            $entry = new NoPidTimeEntry(
+                $code,
+                $date . ' ' . $start,
+                $date . ' ' . $stop
+            );
         }
-        $pid = $this->pidMap[$code];
 
-        $entry = new TimeEntry(
-            $code,
-            $date . ' ' . $start,
-            $date . ' ' . $stop
-        );
-
-        $entry->setTogglPid($pid);
         $entry->setDescription($desc);
 
         // Add tag for OPS
