@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace Kenjis\ToggleTimeEntryPusher;
 
+use Kenjis\ToggleTimeEntryPusher\Exception\LogicException;
 use Kenjis\ToggleTimeEntryPusher\Exception\RuntimeException;
 use Kenjis\ToggleTimeEntryPusher\Line\DateLine;
+use Kenjis\ToggleTimeEntryPusher\Line\OtherLine;
 use Kenjis\ToggleTimeEntryPusher\Line\TimeEntryLine;
 use Kenjis\ToggleTimeEntryPusher\Parser\ParserInterface;
 use Kenjis\ToggleTimeEntryPusher\Toggl\TimeEntryPusher;
@@ -82,7 +84,11 @@ class TextProcessor
                 $date = $line->getDate();
 
                 $this->updatedText .= $lineString . "\n";
-            } elseif ($line instanceof TimeEntryLine) {
+
+                continue;
+            }
+
+            if ($line instanceof TimeEntryLine) {
                 // create TimeEntry
                 if ($date === null) {
                     throw new RuntimeException(
@@ -123,9 +129,17 @@ class TextProcessor
                 } else {
                     $this->updatedText .= $lineString . "︎\n";
                 }
-            } else {
-                $this->updatedText .= $lineString . "\n";
+
+                continue;
             }
+
+            if ($line instanceof OtherLine) {
+                $this->updatedText .= $lineString . "\n";
+
+                continue;
+            }
+
+            throw new LogicException('Unknown class: ' . get_class($line));
         }
     }
 }
