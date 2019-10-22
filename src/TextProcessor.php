@@ -104,6 +104,7 @@ class TextProcessor
                         $this->outputter->output($message);
 
                         $this->updatedText .= $lineString . "︎\n";
+
                         continue;
                     }
 
