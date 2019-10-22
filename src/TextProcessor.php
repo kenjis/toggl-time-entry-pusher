@@ -124,7 +124,7 @@ class TextProcessor
                     sleep(1);
 
                     if ($this->pusher->push($entry)) {
-                        $this->updatedText .= '✔ ︎' . $lineString . "\n";
+                        $this->updatedText .= '✔ ' . $lineString . "\n";
                     } else {
                         $this->updatedText .= $lineString . "︎\n";
                     }
