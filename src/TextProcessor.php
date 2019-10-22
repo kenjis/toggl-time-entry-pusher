@@ -115,9 +115,11 @@ class TextProcessor
                     // https://github.com/toggl/toggl_api_docs#the-api-format
                     sleep(1);
 
-                    // @TODO catch exceptions
-                    $this->pusher->push($entry);
-                    $this->updatedText .= '✔ ︎' . $lineString . "\n";
+                    if ($this->pusher->push($entry)) {
+                        $this->updatedText .= '✔ ︎' . $lineString . "\n";
+                    } else {
+                        $this->updatedText .= $lineString . "︎\n";
+                    }
                 } else {
                     $this->updatedText .= $lineString . "︎\n";
                 }

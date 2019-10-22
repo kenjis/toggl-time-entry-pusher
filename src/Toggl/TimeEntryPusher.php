@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Kenjis\ToggleTimeEntryPusher\Toggl;
 
 use GuzzleHttp\Client;
-use Kenjis\ToggleTimeEntryPusher\Exception\RuntimeException;
+use GuzzleHttp\Exception\GuzzleException;
 use Kenjis\ToggleTimeEntryPusher\LineOutputter;
 use Kenjis\ToggleTimeEntryPusher\TimeEntry;
 
@@ -33,10 +33,11 @@ class TimeEntryPusher
         $this->outputter = $outputter;
     }
 
-    public function push(TimeEntry $entry) : void
+    public function push(TimeEntry $entry) : bool
     {
         // https://github.com/toggl/toggl_api_docs/blob/master/chapters/time_entries.md
         $uri = 'time_entries';
+
         $entryArray = $entry->asArray();
         $entryArray['created_with'] = 'toggl-time-entry-pusher';
         $options = [
@@ -44,19 +45,29 @@ class TimeEntryPusher
             'json' => ['time_entry' => $entryArray],
         ];
 
-        $response = $this->client->request('POST', $uri, $options);
+        try {
+            $response = $this->client->request('POST', $uri, $options);
+        } catch (GuzzleException $e) {
+            $message = 'Error: ' . $e->getMessage() . PHP_EOL
+                . '  ' . $entry->asString();
+            $this->outputter->output($message);
+
+            return false;
+        }
 
         $code = $response->getStatusCode();
         if ($code !== 200) {
             $reason = $response->getReasonPhrase();
             $message = 'Error: ' . $code . ': ' . $reason . PHP_EOL
-                . $entry->asString();
+                . '  ' . $entry->asString();
             $this->outputter->output($message);
 
-            throw new RuntimeException($code . ': ' . $reason);
+            return false;
         }
 
         $message = '✔ ︎' . $entry->asString();
         $this->outputter->output($message);
+
+        return true;
     }
 }
