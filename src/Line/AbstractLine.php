@@ -11,11 +11,6 @@ abstract class AbstractLine
      */
     protected $text;
 
-    /**
-     * @var string
-     */
-    protected $updatedText;
-
     public function __construct(string $text)
     {
         $this->text = $text;
