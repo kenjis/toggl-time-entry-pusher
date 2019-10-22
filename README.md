@@ -65,7 +65,7 @@ $ php get-project-list.php
 
 And set `PID_MAP` and `TAG_MAP`.
 
-## How to Run
+### Push to Toggl
 
 ```
 $ time php push-time-entries.php time-record.txt
