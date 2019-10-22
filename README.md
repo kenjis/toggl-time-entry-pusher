@@ -1,8 +1,36 @@
 # toggl-time-entry-pusher
 
+This app reads a text file which has your time recording log,
+and pushes the time entries to Toggl API.
+
 ## Specs
 
 ### Text File Format
+
+#### Format
+
+``` 
+<Date>
+<Start>-<Stop>[<Minutes>] <Project Code> <Description>
+```
+
+| Item           |  Format  |
+|----------------|----------|
+|`<Date>`        |YYYY/MM/DD|
+|`<Start>`       |HH:MM     |
+|`<Stop>`        |HH:MM     |
+|`<Minutes>`     | `[0-9]`  |
+|`<Project Code>`| `[A-Z]`  |
+
+#### Project Code
+
+If you define project code suffix, you can use tags in Toggl.
+
+When you have a project code `FOO`, if you use the project code `FOOOPS` 
+(you define the suffix `OPS` means the tag `operation`),
+you can make a time entry which has the tag `operation` of the project `FOO`.
+
+#### Example
 
 ```
 2019/10/18（金）
@@ -17,11 +45,27 @@
 10:00-10:25[25] BAROPS ログ確認
 ```
 
-## How to Run
+## How to Use
+
+### Configure
+
+Create your config file.
+
+``` 
+$ cp conf/Config.php.sample conf/Config.php
+```
+
+And edit it.
+
+If you set `API_KEY` and `WID`, you can get your project list.
 
 ```
 $ php get-project-list.php
 ```
+
+And set `PID_MAP` and `TAG_MAP`.
+
+## How to Run
 
 ```
 $ time php push-time-entries.php time-record.txt
