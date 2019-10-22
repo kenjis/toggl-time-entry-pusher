@@ -6,7 +6,7 @@ namespace Kenjis\ToggleTimeEntryPusher;
 
 class FakeOutputter extends LineOutputter
 {
-    public function output(string $line) : void
+    public function output(string $line = '') : void
     {
     }
 }

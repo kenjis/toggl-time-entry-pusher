@@ -35,7 +35,7 @@ class GetProjectList
                     sprintf('%14s: %s', $key, $val)
                 );
             }
-            $this->outputter->output('');
+            $this->outputter->output();
         }
     }
 }
