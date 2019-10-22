@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace Kenjis\ToggleTimeEntryPusher\Toggl;
 
-require __DIR__ . '/../../conf/Config.php';
-
-use Config;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Response;
 use PHPUnit\Framework\TestCase;
@@ -21,8 +18,8 @@ class ProjectFetcherTest extends TestCase
 
         $fetcher = new ProjectFetcher(
             $client,
-            Config::WID,
-            Config::API_KEY
+            123456,
+            'dummy_api_key'
         );
 
         $response = $fetcher->fetch();
