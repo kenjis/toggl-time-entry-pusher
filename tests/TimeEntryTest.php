@@ -83,4 +83,18 @@ class TimeEntryTest extends TestCase
             $actual->asArray()
         );
     }
+
+    public function testCanGetAsString() : void
+    {
+        $actual = $this->timeEntry;
+        $desc = 'What you did';
+        $actual->setDescription($desc);
+        $pid = 12345;
+        $actual->setTogglPid($pid);
+
+        $this->assertSame(
+            '2019-10-20 14:00-15:00 FOO What you did',
+            $actual->asString()
+        );
+    }
 }

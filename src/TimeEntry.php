@@ -81,4 +81,13 @@ class TimeEntry
     {
         $this->togglPid = $pid;
     }
+
+    public function asString()
+    {
+        return $this->start->format('Y-m-d')
+            . ' ' . $this->start->format('H:i')
+            . '-' . $this->stop->format('H:i')
+            . ' ' . $this->code
+            . ' ' . $this->description;
+    }
 }
