@@ -39,7 +39,8 @@ class PushTimeEntries
         $processor = new TextProcessor(
             $parser,
             $factory,
-            $pusher
+            $pusher,
+            $outputter
         );
 
         $updatedText = $processor->process(file_get_contents($file));

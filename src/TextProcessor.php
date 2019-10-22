@@ -28,6 +28,11 @@ class TextProcessor
     private $pusher;
 
     /**
+     * @var LineOutputter
+     */
+    private $outputter;
+
+    /**
      * @var string
      */
     private $updatedText;
@@ -40,11 +45,13 @@ class TextProcessor
     public function __construct(
         ParserInterface $parser,
         TimeEntryFactory $factory,
-        TimeEntryPusher $pusher
+        TimeEntryPusher $pusher,
+        LineOutputter $outputter
     ) {
         $this->parser = $parser;
         $this->factory = $factory;
         $this->pusher = $pusher;
+        $this->outputter = $outputter;
     }
 
     public function process(string $text) : string
