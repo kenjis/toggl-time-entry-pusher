@@ -10,6 +10,8 @@ use Kenjis\ToggleTimeEntryPusher\Line\DateLine;
 use Kenjis\ToggleTimeEntryPusher\Line\OtherLine;
 use Kenjis\ToggleTimeEntryPusher\Line\TimeEntryLine;
 use Kenjis\ToggleTimeEntryPusher\Parser\ParserInterface;
+use Kenjis\ToggleTimeEntryPusher\TimeEntry\NoPidTimeEntry;
+use Kenjis\ToggleTimeEntryPusher\TimeEntry\TimeEntryFactory;
 use Kenjis\ToggleTimeEntryPusher\Toggl\TimeEntryPusher;
 
 class TextProcessor

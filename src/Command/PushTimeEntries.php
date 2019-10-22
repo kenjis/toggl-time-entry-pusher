@@ -10,7 +10,7 @@ use Kenjis\ToggleTimeEntryPusher\Exception\RuntimeException;
 use Kenjis\ToggleTimeEntryPusher\LineOutputter;
 use Kenjis\ToggleTimeEntryPusher\Parser\ParserInterface;
 use Kenjis\ToggleTimeEntryPusher\TextProcessor;
-use Kenjis\ToggleTimeEntryPusher\TimeEntryFactory;
+use Kenjis\ToggleTimeEntryPusher\TimeEntry\TimeEntryFactory;
 use Kenjis\ToggleTimeEntryPusher\Toggl\TimeEntryPusher;
 
 class PushTimeEntries

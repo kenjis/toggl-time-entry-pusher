@@ -7,7 +7,7 @@ namespace Kenjis\ToggleTimeEntryPusher\Toggl;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use Kenjis\ToggleTimeEntryPusher\LineOutputter;
-use Kenjis\ToggleTimeEntryPusher\TimeEntry;
+use Kenjis\ToggleTimeEntryPusher\TimeEntry\TimeEntry;
 
 class TimeEntryPusher
 {
