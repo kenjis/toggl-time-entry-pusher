@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Kenjis\ToggleTimeEntryPusher;
 
-use Config;
 use Kenjis\ToggleTimeEntryPusher\Parser\TextParserJa;
 use Kenjis\ToggleTimeEntryPusher\TimeEntry\TimeEntryFactory;
 use Kenjis\ToggleTimeEntryPusher\Toggl\TimeEntryPusher;
@@ -17,7 +16,7 @@ class TextProcessorTest extends TestCase
      */
     private $processor;
 
-    public function setUp()
+    protected function setUp() : void
     {
         $parser = new TextParserJa();
         $factory = new TimeEntryFactory(
