@@ -93,7 +93,7 @@ class TimeEntryTest extends TestCase
         $actual->setTogglPid($pid);
 
         $this->assertSame(
-            '2019-10-20 14:00-15:00 FOO What you did',
+            '2019-10-20 14:00-15:00[60] FOO What you did',
             $actual->asString()
         );
     }
