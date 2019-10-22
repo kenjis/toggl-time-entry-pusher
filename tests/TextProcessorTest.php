@@ -25,7 +25,7 @@ class TextProcessorTest extends TestCase
         $pusher = $this->createMock(TimeEntryPusher::class);
         $pusher->method('push')
             ->willReturn(true);
-        $outputter = new LineOutputter();
+        $outputter = new FakeOutputter();
         $this->processor = new TextProcessor(
             $parser,
             $factory,
