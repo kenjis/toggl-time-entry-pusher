@@ -87,8 +87,8 @@ class TimeEntry
         return $this->start->format('Y-m-d')
             . ' ' . $this->start->format('H:i')
             . '-' . $this->stop->format('H:i')
-            . '[' . (int) ($this->duration / 60) . ']'
-            . ' ' . $this->code
+            . '[' . (int) ($this->duration / 60) . '] '
+            . $this->code
             . ' ' . $this->description;
     }
 }
