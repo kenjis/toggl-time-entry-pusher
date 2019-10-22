@@ -44,6 +44,7 @@ class PushTimeEntries
         );
 
         $updatedText = $processor->process(file_get_contents($file));
+        $updatedText = trim($updatedText) . "\n";
         file_put_contents($file, $updatedText, LOCK_EX);
     }
 }
