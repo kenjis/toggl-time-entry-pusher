@@ -98,12 +98,14 @@ class TextProcessor
                     $line->getDesc()
                 );
 
-                if ($entry instanceof NoPidTimeEntry) {
-                    // @TODO output skipping entry
-                    return;
-                }
-
                 if ($this->mode === 'push') {
+                    if ($entry instanceof NoPidTimeEntry) {
+                        $message = 'Skip: ' . $entry->asString();
+                        $this->outputter->output($message);
+
+                        continue;
+                    }
+
                     // push to Toggl
 
                     // > Limits will and can change during time,
