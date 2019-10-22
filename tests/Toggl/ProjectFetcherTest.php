@@ -15,12 +15,7 @@ class ProjectFetcherTest extends TestCase
 {
     public function testCanFetchProject() : void
     {
-        $client = $this->getMockBuilder(Client::class)
-            ->disableOriginalConstructor()
-            ->disableOriginalClone()
-            ->disableArgumentCloning()
-            ->disallowMockingUnknownTypes()
-            ->getMock();
+        $client = $this->createMock(Client::class);
         $client->method('request')
             ->willReturn(new Response());
 
