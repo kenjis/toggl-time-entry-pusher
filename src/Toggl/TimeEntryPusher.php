@@ -6,6 +6,7 @@ namespace Kenjis\ToggleTimeEntryPusher\Toggl;
 
 use GuzzleHttp\Client;
 use Kenjis\ToggleTimeEntryPusher\Exception\RuntimeException;
+use Kenjis\ToggleTimeEntryPusher\LineOutputter;
 use Kenjis\ToggleTimeEntryPusher\TimeEntry;
 
 class TimeEntryPusher
@@ -20,10 +21,16 @@ class TimeEntryPusher
      */
     private $apiToken;
 
-    public function __construct(Client $client, string $apiToken)
+    /**
+     * @var LineOutputter
+     */
+    private $outputter;
+
+    public function __construct(Client $client, string $apiToken, LineOutputter $outputter)
     {
         $this->client = $client;
         $this->apiToken = $apiToken;
+        $this->outputter = $outputter;
     }
 
     public function push(TimeEntry $entry) : void
@@ -42,8 +49,14 @@ class TimeEntryPusher
         $code = $response->getStatusCode();
         if ($code !== 200) {
             $reason = $response->getReasonPhrase();
+            $message = 'Error: ' . $code . ': ' . $reason . PHP_EOL
+                . $entry->asString();
+            $this->outputter->output($message);
 
             throw new RuntimeException($code . ': ' . $reason);
         }
+
+        $message = '✔ ︎' . $entry->asString();
+        $this->outputter->output($message);
     }
 }

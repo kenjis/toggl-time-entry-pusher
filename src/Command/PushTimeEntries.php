@@ -7,6 +7,7 @@ namespace Kenjis\ToggleTimeEntryPusher\Command;
 use Config;
 use GuzzleHttp\Client;
 use Kenjis\ToggleTimeEntryPusher\Exception\RuntimeException;
+use Kenjis\ToggleTimeEntryPusher\LineOutputter;
 use Kenjis\ToggleTimeEntryPusher\Parser\TextParserJa;
 use Kenjis\ToggleTimeEntryPusher\TextProcessor;
 use Kenjis\ToggleTimeEntryPusher\TimeEntryFactory;
@@ -25,9 +26,11 @@ class PushTimeEntries
             // Base URI is used with relative requests
             'base_uri' => Config::TOGGL_BASE_URL,
         ]);
+        $outputter = new LineOutputter();
         $pusher = new TimeEntryPusher(
             $client,
-            Config::API_KEY
+            Config::API_KEY,
+            $outputter
         );
         $factory = new TimeEntryFactory(
             Config::PID_MAP,
