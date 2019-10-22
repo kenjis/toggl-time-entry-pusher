@@ -11,12 +11,7 @@ class GetProjectListTest extends TestCase
 {
     public function testCanGetProjectListOutput() : void
     {
-        $fetcher = $this->getMockBuilder(ProjectFetcher::class)
-            ->disableOriginalConstructor()
-            ->disableOriginalClone()
-            ->disableArgumentCloning()
-            ->disallowMockingUnknownTypes()
-            ->getMock();
+        $fetcher = $this->createMock(ProjectFetcher::class);
 
         $array = [
             [
