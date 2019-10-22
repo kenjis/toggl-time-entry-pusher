@@ -78,7 +78,9 @@ class TextProcessor
             } elseif ($line instanceof TimeEntryLine) {
                 // create TimeEntry
                 if ($date === null) {
-                    throw new RuntimeException('Cannot get date');
+                    throw new RuntimeException(
+                        'Cannot get date: ' . $lineString
+                    );
                 }
 
                 $entry = $this->factory->create(
