@@ -18,6 +18,7 @@ class TimeEntryTest extends TestCase
         date_default_timezone_set('Asia/Tokyo');
 
         $this->timeEntry = new TimeEntry(
+            'FOO',
             '2019/10/20 14:00',
             '2019/10/20 15:00'
         );

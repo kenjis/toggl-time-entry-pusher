@@ -11,6 +11,11 @@ class TimeEntry
     /**
      * @var string
      */
+    private $code;
+
+    /**
+     * @var string
+     */
     private $description;
 
     /**
@@ -40,8 +45,9 @@ class TimeEntry
      */
     private $togglTags;
 
-    public function __construct(string $start, string $stop)
+    public function __construct(string $code, string $start, string $stop)
     {
+        $this->code = $code;
         $this->start = new DateTimeImmutable($start);
         $this->stop = new DateTimeImmutable($stop);
 

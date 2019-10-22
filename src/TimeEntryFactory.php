@@ -38,6 +38,7 @@ class TimeEntryFactory
         $pid = $this->pidMap[$code];
 
         $entry = new TimeEntry(
+            $code,
             $date . ' ' . $start,
             $date . ' ' . $stop
         );
