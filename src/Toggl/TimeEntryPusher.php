@@ -65,7 +65,7 @@ class TimeEntryPusher
             return false;
         }
 
-        $message = '✔ ︎' . $entry->asString();
+        $message = '✔ ' . $entry->asString();
         $this->outputter->output($message);
 
         return true;
