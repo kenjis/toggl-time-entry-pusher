@@ -6,8 +6,10 @@ require __DIR__ . '/vendor/autoload.php';
 require __DIR__ . '/conf/Config.php';
 
 use Kenjis\ToggleTimeEntryPusher\Command\PushTimeEntries;
+use Kenjis\ToggleTimeEntryPusher\Parser\TextParserJa;
 
 $file = $argv[1];
 
-$command = new PushTimeEntries();
+$parser = new TextParserJa();
+$command = new PushTimeEntries($parser);
 $command->run($file);

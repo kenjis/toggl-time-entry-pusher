@@ -8,20 +8,29 @@ use Config;
 use GuzzleHttp\Client;
 use Kenjis\ToggleTimeEntryPusher\Exception\RuntimeException;
 use Kenjis\ToggleTimeEntryPusher\LineOutputter;
-use Kenjis\ToggleTimeEntryPusher\Parser\TextParserJa;
+use Kenjis\ToggleTimeEntryPusher\Parser\ParserInterface;
 use Kenjis\ToggleTimeEntryPusher\TextProcessor;
 use Kenjis\ToggleTimeEntryPusher\TimeEntryFactory;
 use Kenjis\ToggleTimeEntryPusher\Toggl\TimeEntryPusher;
 
 class PushTimeEntries
 {
+    /**
+     * @var ParserInterface
+     */
+    private $parser;
+
+    public function __construct(ParserInterface $parser)
+    {
+        $this->parser = $parser;
+    }
+
     public function run(string $file) : void
     {
         if (! is_readable($file)) {
             throw new RuntimeException('Cannot read file: ' . $file);
         }
 
-        $parser = new TextParserJa();
         $client = new Client([
             // Base URI is used with relative requests
             'base_uri' => Config::TOGGL_BASE_URL,
@@ -37,7 +46,7 @@ class PushTimeEntries
             Config::TAG_MAP
         );
         $processor = new TextProcessor(
-            $parser,
+            $this->parser,
             $factory,
             $pusher,
             $outputter
