@@ -35,6 +35,6 @@ class Config
      */
     public const TAG_MAP = [
         // Project Code Suffix => Tag Name
-        'OPS' => 'operation',
+        '_OPS' => 'operation',
     ];
 }

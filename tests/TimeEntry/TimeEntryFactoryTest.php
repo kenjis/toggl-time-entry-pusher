@@ -12,10 +12,10 @@ class TimeEntryFactoryTest extends TestCase
     {
         $pidMap = [
             'FOO' => 11111,
-            'FOOOPS' => 11111,
+            'FOO_OPS' => 11111,
         ];
         $tagMap = [
-            'OPS' => '保守',
+            '_OPS' => '保守',
         ];
         $factory = new TimeEntryFactory($pidMap, $tagMap);
 

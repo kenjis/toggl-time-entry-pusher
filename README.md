@@ -19,15 +19,15 @@ and pushes the time entries to Toggl API.
 |`<Date>`        |YYYY/MM/DD|
 |`<Start>`       |HH:MM     |
 |`<Stop>`        |HH:MM     |
-|`<Minutes>`     | `[0-9]+`  |
-|`<Project Code>`| `[A-Z]+`  |
+|`<Minutes>`     | `[0-9]+` |
+|`<Project Code>`| `[A-Z_]+`|
 
 #### Project Code
 
 If you define project code suffix, you can use tags in Toggl.
 
-When you have a project code `FOO`, if you use the project code `FOOOPS` 
-(you define the suffix `OPS` means the tag `operation`),
+When you have a project code `FOO`, if you use the project code `FOO_OPS` 
+(you define the suffix `_OPS` means the tag `operation`),
 you can make a time entry which has the tag `operation` of the project `FOO`.
 
 #### Example
@@ -36,13 +36,13 @@ you can make a time entry which has the tag `operation` of the project `FOO`.
 2019/10/18（金）
 ■本日の報告
 09:30-10:00[30] FOO #1110 クラス設計
-10:00-10:25[25] BAROPS ログ確認
+10:00-10:25[25] BAR_OPS ログ確認
 10:25-11:00[35] BAR #2222 モデルの実装
 
 2019/10/17（木）
 ■本日の報告
-09:30-10:00[30] FOOOPS #1111 バグ調査
-10:00-10:25[25] BAROPS ログ確認
+09:30-10:00[30] FOO_OPS #1111 バグ調査
+10:00-10:25[25] BAR_OPS ログ確認
 ```
 
 ## How to Use
