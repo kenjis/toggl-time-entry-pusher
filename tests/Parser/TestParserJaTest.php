@@ -33,14 +33,7 @@ class TestParserJaTest extends TestCase
 
     public function testCanParseOtherLine() : void
     {
-        $pidMap = [
-            'FOO' => 11111,
-            'FOO_OPS' => 11111,
-        ];
-        $tagMap = [
-            '_OPS' => '保守',
-        ];
-        $parser = new TextParserJa($pidMap, $tagMap);
+        $parser = new TextParserJa();
 
         $text = '■本日の報告';
         $line = $parser->parse($text);
