@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Kenjis\ToggleTimeEntryPusher\TimeEntry;
 
-use Kenjis\ToggleTimeEntryPusher\Exception\RuntimeException;
-
 class TimeEntryFactory
 {
     /**

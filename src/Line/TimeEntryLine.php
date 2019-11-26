@@ -71,7 +71,7 @@ class TimeEntryLine extends AbstractLine
         $this->code = $code;
     }
 
-    public function setTag(string $tag): void
+    public function setTag(string $tag) : void
     {
         $this->tag = $tag;
     }
