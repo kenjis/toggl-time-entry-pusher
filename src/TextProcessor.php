@@ -103,7 +103,8 @@ class TextProcessor
                     $line->getCode(),
                     $line->getStart(),
                     $line->getStop(),
-                    $line->getDesc()
+                    $line->getDesc(),
+                    $line->getTag()
                 );
 
                 if ($this->mode === 'push') {

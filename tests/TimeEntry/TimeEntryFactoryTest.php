@@ -12,10 +12,9 @@ class TimeEntryFactoryTest extends TestCase
     {
         $pidMap = [
             'FOO' => 11111,
-            'FOO_OPS' => 11111,
         ];
         $tagMap = [
-            '_OPS' => '保守',
+            'OPS' => '保守',
         ];
         $factory = new TimeEntryFactory($pidMap, $tagMap);
 
@@ -24,13 +23,17 @@ class TimeEntryFactoryTest extends TestCase
         $start = '10:00';
         $stop = '10:35';
         $desc = '#1111 クラス設計';
+        $tag = 'OPS';
         $entry = $factory->create(
             $date,
             $code,
             $start,
             $stop,
-            $desc
+            $desc,
+            $tag
         );
+
         $this->assertInstanceOf(TimeEntry::class, $entry);
+        $this->assertSame(['保守'], $entry->asArray()['tags']);
     }
 }

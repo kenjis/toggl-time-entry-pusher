@@ -29,7 +29,8 @@ class TimeEntryFactory
         string $code,
         string $start,
         string $stop,
-        string $desc
+        string $desc,
+        ?string $tag = null
     ) : TimeEntry {
         $pid = null;
         if (isset($this->pidMap[$code])) {
@@ -51,13 +52,9 @@ class TimeEntryFactory
 
         $entry->setDescription($desc);
 
-        // Add tag for OPS
-        if (substr($code, -4) === '_OPS') {
-            if (! isset($this->tagMap['_OPS'])) {
-                throw new RuntimeException('Cannot get tag name: ' . $code);
-            }
-
-            $entry->addTag($this->tagMap['_OPS']);
+        // Add tag
+        if (isset($this->tagMap[$tag])) {
+            $entry->addTag($this->tagMap[$tag]);
         }
 
         return $entry;

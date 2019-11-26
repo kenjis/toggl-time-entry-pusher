@@ -21,13 +21,14 @@ class TextParserJa implements ParserInterface
             return $line;
         }
 
-        $pattern = '!\A([0-9]{2}:[0-9]{2})-([0-9]{2}:[0-9]{2})\[[0-9]+\] ([A-Z_]+) (.*)!u';
+        $pattern = '!\A([0-9]{2}:[0-9]{2})-([0-9]{2}:[0-9]{2})\[[0-9]+\] ([A-Z]+)(_[A-Z]+)* (.*)!u';
         if (preg_match($pattern, $lineString, $matches)) {
             $line = new TimeEntryLine($lineString);
             $line->setStart($matches[1]);
             $line->setStop($matches[2]);
             $line->setCode($matches[3]);
-            $line->setDesc($matches[4]);
+            $line->setTag(ltrim($matches[4], '_'));
+            $line->setDesc($matches[5]);
 
             return $line;
         }

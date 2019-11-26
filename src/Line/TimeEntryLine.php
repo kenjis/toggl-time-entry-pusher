@@ -24,6 +24,11 @@ class TimeEntryLine extends AbstractLine
     /**
      * @var string
      */
+    private $tag;
+
+    /**
+     * @var string
+     */
     private $desc;
 
     public function getStart() : string
@@ -39,6 +44,11 @@ class TimeEntryLine extends AbstractLine
     public function getCode() : string
     {
         return $this->code;
+    }
+
+    public function getTag() : string
+    {
+        return $this->tag;
     }
 
     public function getDesc() : string
@@ -59,6 +69,11 @@ class TimeEntryLine extends AbstractLine
     public function setCode(string $code) : void
     {
         $this->code = $code;
+    }
+
+    public function setTag(string $tag): void
+    {
+        $this->tag = $tag;
     }
 
     public function setDesc(string $desc) : void

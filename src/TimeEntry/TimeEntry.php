@@ -89,6 +89,7 @@ class TimeEntry
             . '-' . $this->stop->format('H:i')
             . '[' . (int) ($this->duration / 60) . '] '
             . $this->code
+            . ($this->togglTags === null ? '' : $this->togglTags[0])
             . ' ' . $this->description;
     }
 }

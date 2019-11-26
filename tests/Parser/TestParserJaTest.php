@@ -29,6 +29,19 @@ class TestParserJaTest extends TestCase
         $line = $parser->parse($text);
 
         $this->assertInstanceOf(TimeEntryLine::class, $line);
+        $this->assertSame('FOO', $line->getCode());
+    }
+
+    public function testCanParseTimeEntryWithTag() : void
+    {
+        $parser = new TextParserJa();
+
+        $text = '09:30-10:00[30] FOO_OPS #1110 クラス設計';
+        $line = $parser->parse($text);
+
+        $this->assertInstanceOf(TimeEntryLine::class, $line);
+        $this->assertSame('FOO', $line->getCode());
+        $this->assertSame('OPS', $line->getTag());
     }
 
     public function testCanParseOtherLine() : void
